@@ -364,13 +364,13 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 - (void)setTextAlignment:(NSTextAlignment)textAlignment
 {
     [super setTextAlignment:textAlignment];
-    [self layoutFloatingLabel];
+    [self setNeedsLayout];
 }
 
 - (void)setAlwaysShowFloatingLabel:(BOOL)alwaysShowFloatingLabel
 {
     _alwaysShowFloatingLabel = alwaysShowFloatingLabel;
-    [self layoutFloatingLabel];
+    [self setNeedsLayout];
 }
 
 - (void)setText:(NSString *)text{
@@ -378,7 +378,7 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 //    TLOG(@"text -> %@ _floatingLabel.bounds -> %@", text, NSStringFromCGRect(_floatingLabel.bounds));
 }
 
-- (void)layoutFloatingLabel
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     
