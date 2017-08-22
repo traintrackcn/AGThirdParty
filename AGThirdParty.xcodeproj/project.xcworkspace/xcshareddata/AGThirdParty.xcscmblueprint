@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "588877F215E8CA604D59A959421D210977663011",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "588877F215E8CA604D59A959421D210977663011" : 9223372036854775807,
+    "D13D26D55186243D670B587A687BD8154BF7E34D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B553026D-40B3-440F-A554-DDBFB0C09CCD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "588877F215E8CA604D59A959421D210977663011" : "AGThirdParty\/",
+    "D13D26D55186243D670B587A687BD8154BF7E34D" : "AGThirdParty\/NSData+Base64\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AGThirdParty",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AGThirdParty.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/traintrackcn\/AGThirdParty.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "588877F215E8CA604D59A959421D210977663011"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "\/Users\/traintrackcn\/Library\/Caches\/CocoaPods\/GitHub\/5c913c75e67d5614db2bc5363bb1637e54db08f6",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D13D26D55186243D670B587A687BD8154BF7E34D"
+    }
+  ]
+}

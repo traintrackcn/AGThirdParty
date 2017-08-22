@@ -131,7 +131,7 @@ IB_DESIGNABLE
 /**
  * Color of the placeholder
  */
-@property (nonatomic, strong) IBInspectable UIColor * placeholderColor;
+//@property (nonatomic, strong) IBInspectable UIColor * placeholderColor;
 
 /**
  *  Sets the placeholder and the floating title

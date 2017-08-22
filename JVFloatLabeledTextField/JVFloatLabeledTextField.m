@@ -244,16 +244,16 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
                       textFieldIntrinsicContentSize.height + _floatingLabelYPadding + _floatingLabel.bounds.size.height);
 }
 
-- (void)setCorrectPlaceholder:(NSString *)placeholder
-{
-    if (self.placeholderColor && placeholder) {
-        NSAttributedString *attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
-                                                                                    attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
-        [super setAttributedPlaceholder:attributedPlaceholder];
-    } else {
-        [super setPlaceholder:placeholder];
-    }
-}
+//- (void)setCorrectPlaceholder:(NSString *)placeholder
+//{
+//    if (self.placeholderColor && placeholder) {
+//        NSAttributedString *attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder
+//                                                                                    attributes:@{NSForegroundColorAttributeName: self.placeholderColor}];
+//        [super setAttributedPlaceholder:attributedPlaceholder];
+//    } else {
+//        [super setPlaceholder:placeholder];
+//    }
+//}
 
 - (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder
 {
@@ -269,11 +269,11 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     [self setAttributedFloatingLabelText:attributedFloatingTitle];
 }
 
-- (void)setPlaceholderColor:(UIColor *)color
-{
-    _placeholderColor = color;
-    [self setCorrectPlaceholder:self.placeholder];
-}
+//- (void)setPlaceholderColor:(UIColor *)color
+//{
+//    _placeholderColor = color;
+//    [self setCorrectPlaceholder:self.placeholder];
+//}
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
