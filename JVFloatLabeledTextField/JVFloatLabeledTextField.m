@@ -28,6 +28,8 @@
 #import "JVFloatLabeledTextField.h"
 #import "NSString+TextDirectionality.h"
 
+#define TLOG(__format,__args...) NSLog(@"%s:%d %@",__PRETTY_FUNCTION__, __LINE__,[NSString stringWithFormat:__format, ##__args]);
+
 static CGFloat const kFloatingLabelShowAnimationDuration = 0.3f;
 static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
@@ -60,6 +62,8 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     _floatingLabel.alpha = 0.0f;
 //    _floatingLabel.layer.borderWidth = 1;
     [self addSubview:_floatingLabel];
+    
+//    self.layer.borderWidth = 1;
 	
     // some basic default fonts/colors
     _floatingLabelReductionRatio = 70;
@@ -201,17 +205,17 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (void)setAttributedFloatingLabelText:(NSAttributedString *)attributedText
 {
-    
+//    TLOG(@"attributedText -> %@", attributedText.string);
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithAttributedString:attributedText];
     
     NSRange r = NSMakeRange(0, attributedText.length);
     [str addAttributes:@{NSFontAttributeName:self.floatingLabelFont} range:r];
     
-    NSLog(@"attributedText -> %@", attributedText);
+//    NSLog(@"attributedText -> %@", attributedText);
     
     [_floatingLabel setAttributedText :str ];
-    [self setNeedsLayout];
+    [self layoutSubviews];
 }
 
 
@@ -277,10 +281,16 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
+    
+    
+    
     CGRect rect = [super textRectForBounds:bounds];
     if ([self.text length] || self.keepBaseline) {
         rect = [self insetRectForBounds:rect];
     }
+    
+//    TLOG(@"textRectForBounds -> %@", NSStringFromCGRect(rect));
+    
     return CGRectIntegral(rect);
 }
 
@@ -290,6 +300,9 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     if ([self.text length] || self.keepBaseline) {
         rect = [self insetRectForBounds:rect];
     }
+    
+//    TLOG(@"editingRectForBounds -> %@", NSStringFromCGRect(rect));
+    
     return CGRectIntegral(rect);
 }
 
@@ -297,6 +310,9 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 {
     CGFloat topInset = ceilf(_floatingLabel.bounds.size.height + _placeholderYPadding);
     topInset = MIN(topInset, [self maxTopInset]);
+    
+//    TLOG(@"_floatingLabel.bounds -> %@  topInset -> %@ maxTopInset -> %@",NSStringFromCGRect(_floatingLabel.bounds), @(topInset), @(self.maxTopInset));
+    
     return CGRectMake(rect.origin.x, rect.origin.y + topInset / 2.0f, rect.size.width, rect.size.height);
 }
 
@@ -340,26 +356,35 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
 
 - (CGFloat)maxTopInset
 {
+    
+//    TLOG(@"self.bounds.size.height -> %@ self.font.lineHeight -> %@", @(self.bounds.size.height), @(self.font.lineHeight));
     return MAX(0, floorf(self.bounds.size.height - self.font.lineHeight - 4.0f));
 }
 
 - (void)setTextAlignment:(NSTextAlignment)textAlignment
 {
     [super setTextAlignment:textAlignment];
-    [self setNeedsLayout];
+    [self layoutFloatingLabel];
 }
 
 - (void)setAlwaysShowFloatingLabel:(BOOL)alwaysShowFloatingLabel
 {
     _alwaysShowFloatingLabel = alwaysShowFloatingLabel;
-    [self setNeedsLayout];
+    [self layoutFloatingLabel];
 }
 
-- (void)layoutSubviews
+- (void)setText:(NSString *)text{
+    [super setText:text];
+//    TLOG(@"text -> %@ _floatingLabel.bounds -> %@", text, NSStringFromCGRect(_floatingLabel.bounds));
+}
+
+- (void)layoutFloatingLabel
 {
     [super layoutSubviews];
     
     [self setLabelOriginForTextAlignment];
+    
+//    TLOG(@"_floatingLabel.superview.bounds -> %@", NSStringFromCGRect(_floatingLabel.superview.bounds));
     
     CGSize floatingLabelSize = [_floatingLabel sizeThatFits:_floatingLabel.superview.bounds.size];
     
@@ -367,6 +392,9 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
                                       _floatingLabel.frame.origin.y,
                                       floatingLabelSize.width,
                                       floatingLabelSize.height);
+    
+    
+//    TLOG(@"_floatingLabel.bounds -> %@", NSStringFromCGRect(_floatingLabel.bounds));
     
     BOOL firstResponder = self.isFirstResponder;
 //    _floatingLabel.textColor = (firstResponder && self.text && self.text.length > 0 ?
@@ -377,6 +405,9 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     else {
         [self showFloatingLabel:firstResponder];
     }
+    
+    
 }
+
 
 @end
