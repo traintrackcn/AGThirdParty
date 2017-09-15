@@ -23,6 +23,8 @@
 // THE SOFTWARE.
 //
 
+#define TLOG(__format,__args...) NSLog(@"%s:%d %@",__PRETTY_FUNCTION__, __LINE__,[NSString stringWithFormat:__format, ##__args]);
+
 #import <QuartzCore/QuartzCore.h>
 #import "RSDFDatePickerCollectionView.h"
 #import "RSDFDatePickerCollectionViewLayout.h"
@@ -671,6 +673,11 @@ static NSString * const RSDFDatePickerViewDayCellIdentifier = @"RSDFDatePickerVi
     cell.dateLabel.isAccessibilityElement = NO;
     cell.isAccessibilityElement = !cell.notThisMonth;
     
+    
+    
+    
+    
+    
     if (!cell.isNotThisMonth) {
         NSUInteger cellDateWeekday = [self.calendar components:NSCalendarUnitWeekday fromDate:cellDate].weekday;
         cell.dayOff = (cellDateWeekday == self.calendar.rsdf_saturdayIndex) || (cellDateWeekday == self.calendar.rsdf_sundayIndex);
@@ -711,12 +718,23 @@ static NSString * const RSDFDatePickerViewDayCellIdentifier = @"RSDFDatePickerVi
             cell.outOfRange = YES;
         } else {
             cell.outOfRange = NO;
+            
+            /*** make unselectable cell as out-of-ranged style ***/
+            if ([self.delegate respondsToSelector:@selector(datePickerView:shouldSelectDate:)]) {
+                NSDate *date = [self dateForCellAtIndexPath:indexPath];
+                BOOL shouldSelect =  [self.delegate datePickerView:self shouldSelectDate:date];
+                
+                [cell setOutOfRange:!shouldSelect];
+            }
+            /*** edit by traintrackcn@gmail.com ***/
         }
         
         cell.accessibilityLabel = [NSDateFormatter localizedStringFromDate:cellDate dateStyle:NSDateFormatterLongStyle timeStyle:NSDateFormatterNoStyle];
     }
     
     [cell setNeedsDisplay];
+    
+    
     
     return cell;
 }
@@ -837,6 +855,23 @@ static NSString * const RSDFDatePickerViewDayCellIdentifier = @"RSDFDatePickerVi
     
     return YES;
 }
+
+
+/*** fixed two dates highlight at same time issue ***/
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSDate *date = [self dateForCellAtIndexPath:indexPath];
+//    TLOG(@"selecteData -> %@ will display date -> %@ %@", self.selectedDate, date, @([self.selectedDate isEqual:date]));
+    if (self.selectedDate && [self.selectedDate isEqualToDate:date]){
+        [cell setSelected:YES];
+    }else{
+        [cell setSelected:NO];
+    }
+    
+    [cell setNeedsDisplay];
+}
+/*** edit by traintrackcn@gmail.com ***/
+
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 
