@@ -30,4 +30,11 @@ static NSMutableDictionary* _singletons;
 	return instance;
 }
 
++ (void)resetSingleton{
+    @synchronized(self) {
+        NSString *key = NSStringFromClass(self);
+        [_singletons removeObjectForKey:key];
+    }
+}
+
 @end

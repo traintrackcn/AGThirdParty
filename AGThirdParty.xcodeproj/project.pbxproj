@@ -317,16 +317,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4A1E1FEB1F4BF72300049247 /* Copy iCocoaLumberJack Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = include/CocoaLumberJack;
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			name = "Copy iCocoaLumberJack Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -935,7 +925,6 @@
 				4A1E1E441F4BEF7700049247 /* Sources */,
 				4A1E1E451F4BEF7700049247 /* Frameworks */,
 				4A1E1E461F4BEF7700049247 /* CopyFiles */,
-				4A1E1FEB1F4BF72300049247 /* Copy iCocoaLumberJack Files */,
 				4A1E1E541F4BEFEA00049247 /* lipo */,
 			);
 			buildRules = (

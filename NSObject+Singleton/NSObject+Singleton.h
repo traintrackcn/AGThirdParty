@@ -11,4 +11,6 @@
 
 + (instancetype)singleton;
 
++ (void)resetSingleton;
+
 @end
